@@ -29,6 +29,7 @@ CFLAGS += -D$(VARIANT)
 endif
 
 CFLAGS += -Wall -Wextra
+CFLAGS += -MD
 
 ARFLAGS := -shared
 
