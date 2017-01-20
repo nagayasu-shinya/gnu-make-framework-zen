@@ -130,7 +130,7 @@ ifneq "$(MAKECMDGOALS)" "clean"
 # ディレクトリを生成するためのダミー変数.
 # クリーンのときはディレクトリ生成する必要ない.
   dummy-create-output-directories := \
-    $(shell for f in $(output-directories); do test -d $$f || mkdir --parents $$f; done)
+    $(shell for f in $(output-directories); do test -d $$f || mkdir -p $$f; done)
 endif
 
 

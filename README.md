@@ -1,5 +1,5 @@
-minimal-gnu-make-framework
+-gnu-make-framework-zen
 ==========================
-This is minimal GNU makefile framework. It may help you to develop when an environment does not support IDE.
+This is GNU makefile framework. It may help you to develop when an environment does not support IDE.
 
 This is now under **developing**.
