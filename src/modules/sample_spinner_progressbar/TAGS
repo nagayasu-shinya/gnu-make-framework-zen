@@ -1,0 +1,17 @@
+
+c:/Users/g4310910/work/minimal-gnu-make-framework/src/modules/sample_spinner_progressbar\module.mk,342
+local_directory := $(subdirectory)local_directory7,255
+local_module    := sample_spinner_progressbarlocal_module11,328
+local_sources   := sample_progressbar.c sample_spinner.clocal_sources13,377
+local_includes  := $(local_directory)local_includes14,435
+local_cflags    :=local_cflags15,474
+local_libraries :=local_libraries16,494
+
+c:/Users/g4310910/work/minimal-gnu-make-framework/src/modules/sample_spinner_progressbar\sample_progressbar.c,70
+int sample_progressbar(unsigned int wait_sec)sample_progressbar5,84
+
+c:/Users/g4310910/work/minimal-gnu-make-framework/src/modules/sample_spinner_progressbar\sample_spinner.c,62
+int sample_spinner(unsigned int wait_sec)sample_spinner5,84
+
+c:/Users/g4310910/work/minimal-gnu-make-framework/src/modules/sample_spinner_progressbar\sample_spinner_progressbar.h,89
+#define SAMPLE_SPINNER_PROGRESSBAR_H_INCLUDEDSAMPLE_SPINNER_PROGRESSBAR_H_INCLUDED2,47
