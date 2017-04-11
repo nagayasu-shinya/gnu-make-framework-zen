@@ -30,8 +30,9 @@ endif
 
 CFLAGS += -Wall -Wextra
 CFLAGS += -MD
+CFLAGS += -fPIC
 
-ARFLAGS := -shared
+ARFLAGS := -shared -fPIC
 
 #--------------------------------------------------------------------------------------------------
 # set objcopy.

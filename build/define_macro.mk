@@ -55,10 +55,10 @@ endef
 
 #--------------------------------------------------------------------------------------------------
 # create executalble file.
-# $(call make-executable-file exec, start_entry, libraries, ldflags)
+# $(call make-executable-file exec, start_entry, libraries, sources, ldflags)
 #--------------------------------------------------------------------------------------------------
 define make-executable-file
-  $1: $2 $(addprefix lib,$(addsuffix .so,$3))
+  $1: $2 $(call source-to-object,$3) $(addprefix lib,$(addsuffix .so,$4)) 
 	$(LD) $(LDFLAGS) $(local_ldflags) $$^ -o $$@
 endef
 

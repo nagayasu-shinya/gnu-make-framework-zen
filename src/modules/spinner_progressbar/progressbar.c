@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
-#include "sample_spinner_progressbar.h"
+#include "spinner_progressbar.h"
 
 int sample_progressbar(unsigned int wait_sec)
 {

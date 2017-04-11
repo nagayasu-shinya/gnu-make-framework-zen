@@ -3,7 +3,7 @@
  * @brief sample
  *
  */
-#include "sample_spinner_progressbar.h"
+#include "spinner_progressbar.h"
 
 int main(void)
 {
