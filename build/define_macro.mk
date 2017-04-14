@@ -8,21 +8,29 @@
 # create objects file list(objects) from source file list(sources).
 # $(call souce-to-object, source-file-list)
 #--------------------------------------------------------------------------------------------------
-source-to-object = $(subst .c,.o,$(filter %.c,$1)) \
-                   $(subst .s,.o,$(filter %.s,$1)) \
+source-to-object = $(subst   .c,.o,$(filter   %.c,$1)) \
+                   $(subst .cpp,.o,$(filter %.cpp,$1)) \
+                   $(subst .cxx,.o,$(filter %.cxx,$1)) \
+                   $(subst   .s,.o,$(filter   %.s,$1)) \
                    $(subst .arm,.o,$(filter %.arm,$1))
 
-source-to-dependence = $(subst .c,.d,$(filter %.c,$1)) \
-                       $(subst .s,.d,$(filter %.s,$1)) \
+source-to-dependence = $(subst   .c,.d,$(filter   %.c,$1)) \
+                       $(subst .cpp,.d,$(filter %.cpp,$1)) \
+                       $(subst .cxx,.d,$(filter %.cxx,$1)) \
+                       $(subst   .s,.d,$(filter   %.s,$1)) \
                        $(subst .arm,.d,$(filter %.arm,$1))
+
+#--------------------------------------------------------------------------------------------------
+# all sources at directory
+# $(call local-all-sources, directory)
+#--------------------------------------------------------------------------------------------------
+local-all-sources = $(notdir $(wildcard $(addprefix $(SOURCE_TREE_DIR)/$1/,*.c *.cpp *.cxx *.s *.arm)))
 
 #--------------------------------------------------------------------------------------------------
 # path of module.mk.
 # $(subdirectory)
 #--------------------------------------------------------------------------------------------------
 subdirectory = $(patsubst $(SOURCE_TREE_DIR)/%/,%, $(dir $(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))))
-
-get-local-dir = $(patsubst $(SOURCE_TREE_DIR)/%/,%, $(dir $(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))))
 
 #--------------------------------------------------------------------------------------------------
 # create library. (static library.)
@@ -58,7 +66,7 @@ endef
 # $(call make-executable-file exec, start_entry, libraries, sources, ldflags)
 #--------------------------------------------------------------------------------------------------
 define make-executable-file
-  $1: $2 $(call source-to-object,$3) $(addprefix lib,$(addsuffix .so,$4)) 
+  $1: $2 $(addprefix lib,$(addsuffix .so,$3)) $(call source-to-object,$4)
 	$(LD) $(LDFLAGS) $(local_ldflags) $$^ -o $$@
 endef
 

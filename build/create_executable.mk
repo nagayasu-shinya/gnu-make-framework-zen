@@ -17,7 +17,7 @@ $(eval $(call add-cflags,   $(private_sources), $(local_cflags)))
 
 $(eval $(call add-includes, $(local_ld_entry), $(local_includes) $(local_directory)))
 $(eval $(call make-executable-file, \
-       $(private_executable_file), $(call source-to-object,$(local_ld_entry)), $(private_sources), $(local_libraries), $(local_ldflags)))
+       $(private_executable_file), $(call source-to-object,$(local_ld_entry)), $(local_libraries), $(private_sources), $(local_ldflags)))
 
 $(eval $(call clean-executable-file, \
        $(private_clean_executable_file), $(call source-to-object,$(local_ld_entry)), $(local_libraries)))
