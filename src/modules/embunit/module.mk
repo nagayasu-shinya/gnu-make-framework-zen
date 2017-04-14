@@ -10,7 +10,7 @@ include $(CLEAR_LOCAL_VARIABLE)
 
 local_module    := embunit
 
-local_sources    := $(call local-all-sources, $(local_directory))
+local_sources    := $(call local-all-sources,$(local_directory))
 #local_sources   += AssertImpl.c
 #local_sources   += TestCaller.c
 #local_sources   += TestResult.c
