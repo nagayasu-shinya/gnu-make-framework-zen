@@ -1,14 +1,40 @@
 #**************************************************************************************************
+# MIT License
 #
-# @brief  •W€ƒTƒtƒBƒbƒNƒXƒ‹[ƒ‹.
+# Copyright (c) 2017 NAGAYASU Shinya
 #
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#
+#---------------------------------------------------------------------------------------------------
+#
+# @file
+# @brief suffix rules.
+#
+# @author    NAGAYASU Shinya
+# @copyright 2017 NAGAYASU Shinya
 #
 #**************************************************************************************************
 
 #
-# ƒTƒtƒBƒbƒNƒXƒ‹[ƒ‹‚ð‹ó‚É‚µ‚½‚ ‚Æ‚ÉA•K—v‚ÈÝ’è‚ð‚¨‚±‚È‚¤.
-# ‚È‚º‚© ".SUFFIXES:" ‚Å‚Í‹ó‚É‚È‚ç‚È‚¢‚Ì‚Å, 
-# make ƒIƒvƒVƒ‡ƒ“ "--no-builtin-rules" ‚ð’Ç‰Á.
-#
+# ã‚µãƒ•ã‚£ãƒƒã‚¯ã‚¹ãƒ«ãƒ¼ãƒ«ã‚’ç©ºã«ã—ãŸã‚ã¨ã«ã€å¿…è¦ãªè¨­å®šã‚’ãŠã“ãªã†.
+# ãªãœã‹ ".SUFFIXES:" ã§ã¯ç©ºã«ãªã‚‰ãªã„ã®ã§, 
+# make ã‚ªãƒ—ã‚·ãƒ§ãƒ³ "--no-builtin-rules" ã‚’è¿½åŠ .
+
 MAKEFLAGS += --no-builtin-rules
 .SUFFIXES:
