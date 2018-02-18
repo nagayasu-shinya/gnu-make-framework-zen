@@ -32,20 +32,20 @@
  *
  * $Id: TestResult.h,v 1.7 2004/02/10 16:19:29 arms22 Exp $
  */
-#ifndef	__TESTRESULT_H__
-#define	__TESTRESULT_H__
+#ifndef	EMBUNIT_TESTRESULT_H
+#define	EMBUNIT_TESTRESULT_H
 
 #ifdef	__cplusplus
 extern "C" {
 #endif
 
-/*typedef struct __TestResult		TestResult;*//* -> Test.h*/
-/*typedef struct __TestResult*		TestResultRef;*//* -> Test.h*/
+/*typedef struct embTestResult		TestResult;*//* -> Test.h*/
+/*typedef struct embTestResult*		TestResultRef;*//* -> Test.h*/
 
-typedef struct __TestListner	TestListner;
-typedef struct __TestListner*	TestListnerRef;/*downward compatible*/
+typedef struct embTestListner	TestListner;
+typedef struct embTestListner*	TestListnerRef;/*downward compatible*/
 
-struct __TestResult {
+struct embTestResult {
 	unsigned short runCount;
 	unsigned short failureCount;
 	TestListner* listener;
@@ -67,4 +67,4 @@ void TestResult_addFailure(TestResult* self,Test* test,const char* msg,int line,
 }
 #endif
 
-#endif/*__TESTRESULT_H__*/
+#endif/*EMBUNIT_TESTRESULT_H*/

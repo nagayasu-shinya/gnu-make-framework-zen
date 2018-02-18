@@ -32,13 +32,13 @@
  *
  * $Id: TestCase.h,v 1.7 2004/02/10 16:19:29 arms22 Exp $
  */
-#ifndef	__TESTCASE_H__
-#define	__TESTCASE_H__
+#ifndef	EMBUNIT_TESTCASE_H
+#define	EMBUNIT_TESTCASE_H
 
-typedef struct __TestCase	TestCase;
-typedef struct __TestCase*	TestCaseRef;/*compatible embUnit1.0*/
+typedef struct embTestCase	TestCase;
+typedef struct embTestCase*	TestCaseRef;/*compatible embUnit1.0*/
 
-struct __TestCase {
+struct embTestCase {
 	TestImplement* isa;
 	char *name;
 	void(*setUp)(void);
@@ -57,4 +57,4 @@ extern const TestImplement TestCaseImplement;
 		runTest,\
 	}
 
-#endif/*__TESTCASE_H__*/
+#endif/*EMBUNIT_TESTCASE_H*/

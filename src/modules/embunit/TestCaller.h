@@ -32,13 +32,13 @@
  *
  * $Id: TestCaller.h,v 1.7 2004/02/10 16:19:29 arms22 Exp $
  */
-#ifndef	__TESTCALLER_H__
-#define	__TESTCALLER_H__
+#ifndef	EMBUNIT_TESTCALLER_H
+#define	EMBUNIT_TESTCALLER_H
 
-typedef struct __TestFixture	TestFixture;
-typedef struct __TestFixture*	TestFixtureRef;/*downward compatible*/
+typedef struct embTestFixture	TestFixture;
+typedef struct embTestFixture*	TestFixtureRef;/*downward compatible*/
 
-struct __TestFixture {
+struct embTestFixture {
 	char *name;
 	void(*test)(void);
 };
@@ -49,10 +49,10 @@ struct __TestFixture {
 		test,\
 	}
 
-typedef struct __TestCaller		TestCaller;
-typedef struct __TestCaller*	TestCallerRef;/*downward compatible*/
+typedef struct embTestCaller		TestCaller;
+typedef struct embTestCaller*	TestCallerRef;/*downward compatible*/
 
-struct __TestCaller {
+struct embTestCaller {
 	TestImplement* isa;
 	char *name;
 	void(*setUp)(void);
@@ -73,4 +73,4 @@ extern const TestImplement TestCallerImplement;
 		fixtuers,\
 	}
 
-#endif/*__TESTCALLER_H__*/
+#endif/*EMBUNIT_TESTCALLER_H*/

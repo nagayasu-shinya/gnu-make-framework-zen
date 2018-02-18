@@ -32,26 +32,26 @@
  *
  * $Id: TestListener.h,v 1.4 2004/02/10 16:19:29 arms22 Exp $
  */
-#ifndef	__TESTLISTENER_H__
-#define	__TESTLISTENER_H__
+#ifndef	EMBUNIT_TESTLISTENER_H
+#define	EMBUNIT_TESTLISTENER_H
 
-typedef struct __TestListnerImplement	TestListnerImplement;
-typedef struct __TestListnerImplement*	TestListnerImplementRef;/*downward compatible*/
+typedef struct embTestListnerImplement	TestListnerImplement;
+typedef struct embTestListnerImplement*	TestListnerImplementRef;/*downward compatible*/
 
 typedef void(*TestListnerStartTestCallBack)(void*,void*);
 typedef void(*TestListnerEndTestCallBack)(void*,void*);
 typedef void(*TestListnerAddFailureCallBack)(void*,void*,const char*,int,const char*);
 
-struct __TestListnerImplement {
+struct embTestListnerImplement {
 	TestListnerStartTestCallBack startTest;
 	TestListnerEndTestCallBack endTest;
 	TestListnerAddFailureCallBack addFailure;
 };
 
-/*typedef struct __TestListner	TestListner;*/	/*->TestResult.h*/
-/*typedef struct __TestListner*	TestListnerRef;*/	/*->TestResult.h*/
+/*typedef struct embTestListner	TestListner;*/	/*->TestResult.h*/
+/*typedef struct embTestListner*	TestListnerRef;*/	/*->TestResult.h*/
 
-struct __TestListner {
+struct embTestListner {
 	TestListnerImplement* isa;
 };
 
@@ -59,4 +59,4 @@ struct __TestListner {
 #define TestListner_endTest(s,t)			((TestListner*)s)->isa->endTest(s,t)
 #define TestListner_addFailure(s,t,m,l,f)	((TestListner*)s)->isa->addFailure(s,t,m,l,f)
 
-#endif/*__TESTLISTENER_H__*/
+#endif/*EMBUNIT_TESTLISTENER_H*/

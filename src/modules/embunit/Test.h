@@ -32,29 +32,29 @@
  *
  * $Id: Test.h,v 1.4 2004/02/10 16:19:29 arms22 Exp $
  */
-#ifndef	__TEST_H__
-#define	__TEST_H__
+#ifndef	EMBUNIT_TEST_H
+#define	EMBUNIT_TEST_H
 
-typedef struct __TestResult		TestResult;
-typedef struct __TestResult*	TestResultRef;/*downward compatible*/
+typedef struct embTestResult		TestResult;
+typedef struct embTestResult*	TestResultRef;/*downward compatible*/
 
-typedef struct __TestImplement	TestImplement;
-typedef struct __TestImplement*	TestImplementRef;/*downward compatible*/
+typedef struct embTestImplement	TestImplement;
+typedef struct embTestImplement*	TestImplementRef;/*downward compatible*/
 
 typedef char*(*TestNameFunction)(void*);
 typedef void(*TestRunFunction)(void*,TestResult*);
 typedef int(*TestCountTestCasesFunction)(void*);
 
-struct __TestImplement {
+struct embTestImplement {
 	TestNameFunction name;
 	TestRunFunction run;
 	TestCountTestCasesFunction countTestCases;
 };
 
-typedef struct __Test	Test;
-typedef struct __Test*	TestRef;/*downward compatible*/
+typedef struct embTest	Test;
+typedef struct embTest*	TestRef;/*downward compatible*/
 
-struct __Test {
+struct embTest {
 	TestImplement* isa;
 };
 
@@ -62,4 +62,4 @@ struct __Test {
 #define Test_run(s,r)			((Test*)s)->isa->run(s,r)
 #define Test_countTestCases(s)	((Test*)s)->isa->countTestCases(s)
 
-#endif/*__TEST_H__*/
+#endif/*EMBUNIT_TEST_H*/

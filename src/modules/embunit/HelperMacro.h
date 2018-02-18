@@ -32,8 +32,8 @@
  *
  * $Id: HelperMacro.h,v 1.3 2004/02/10 16:19:29 arms22 Exp $
  */
-#ifndef	__HELPERMACRO_H__
-#define	__HELPERMACRO_H__
+#ifndef	EMBUNIT_HELPERMACRO_H
+#define	EMBUNIT_HELPERMACRO_H
 
 #define EMB_UNIT_TESTCASE(ca,name,sup,tdw,run) \
 	static const TestCase	ca = new_TestCase(name,sup,tdw,run)
@@ -56,4 +56,4 @@
 #define EMB_UNIT_REPEATEDTEST(repeater,test,tmrp) \
 	static const RepeatedTest	repeater = new_RepeatedTest(test,tmrp)
 
-#endif/*__HELPERMACRO_H__*/
+#endif/*EMBUNIT_HELPERMACRO_H*/

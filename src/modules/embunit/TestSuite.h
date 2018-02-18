@@ -32,13 +32,13 @@
  *
  * $Id: TestSuite.h,v 1.7 2004/02/10 16:19:29 arms22 Exp $
  */
-#ifndef	__TESTSUITE_H__
-#define	__TESTSUITE_H__
+#ifndef	EMBUNIT_TESTSUITE_H
+#define	EMBUNIT_TESTSUITE_H
 
-typedef struct __TestSuite	TestSuite;
-typedef struct __TestSuite*	TestSuiteRef;/*downward compatible*/
+typedef struct embTestSuite	TestSuite;
+typedef struct embTestSuite*	TestSuiteRef;/*downward compatible*/
 
-struct __TestSuite {
+struct embTestSuite {
 	TestImplement* isa;
 	char *name;
 	int numberOfTests;
@@ -55,4 +55,4 @@ extern const TestImplement TestSuiteImplement;
 		tests,\
 	}
 
-#endif/*__TESTSUITE_H__*/
+#endif/*EMBUNIT_TESTSUITE_H*/
