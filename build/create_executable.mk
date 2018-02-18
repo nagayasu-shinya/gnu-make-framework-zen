@@ -49,7 +49,7 @@ $(eval $(call make-executable-file, \
 $(eval $(call clean-executable-file, \
        $(private_clean_executable_file), $(call source-to-object,$(local_ld_entry)), $(local_libraries)))
 
-all_sources += $(local_ld_entry)
+all_sources += $(local_ld_entry) $(private_sources)
 all_targets += $(private_executable_file)
 
 private_executable_file :=
