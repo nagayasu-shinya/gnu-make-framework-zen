@@ -3,7 +3,7 @@
 TestRef CounterTest_tests(void);
 TestRef PersonTest_tests(void);
 
-int main (int argc, const char* argv[])
+int main (int argc, char* argv[])
 {
 	TestRunner_start();
 		TestRunner_runTest(CounterTest_tests());
