@@ -32,13 +32,13 @@
  *
  * $Id: RepeatedTest.h,v 1.7 2004/02/10 16:19:29 arms22 Exp $
  */
-#ifndef	__REPEATEDTEST_H__
-#define	__REPEATEDTEST_H__
+#ifndef	EMBUNIT_REPEATEDTEST_H
+#define	EMBUNIT_REPEATEDTEST_H
 
-typedef struct __RepeatedTest	RepeatedTest;
-typedef struct __RepeatedTest*	RepeatedTestRef;	/*downward compatible*/
+typedef struct embRepeatedTest	RepeatedTest;
+typedef struct embRepeatedTest*	RepeatedTestRef;	/*downward compatible*/
 
-struct __RepeatedTest {
+struct embRepeatedTest {
 	TestImplement* isa;
 	Test* test;
 	int timesRepeat;
@@ -53,4 +53,4 @@ extern const TestImplement RepeatedTestImplement;
 		tmrp,\
 	}
 
-#endif/*__REPEATEDTEST_H__*/
+#endif/*EMBUNIT_REPEATEDTEST_H*/

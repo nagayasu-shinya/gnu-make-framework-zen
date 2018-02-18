@@ -1,10 +1,10 @@
-#ifndef	__COUNTER_H__
-#define	__COUNTER_H__
+#ifndef	EMBUNIT_COUNTER_H
+#define	EMBUNIT_COUNTER_H
 
-typedef struct __Counter	Counter;
-typedef struct __Counter*	CounterRef;
+typedef struct embCounter	Counter;
+typedef struct embCounter*	CounterRef;
 
-struct __Counter {
+struct embCounter {
 	int value;
 };
 
@@ -18,4 +18,4 @@ int Counter_inc(CounterRef);
 int Counter_dec(CounterRef);
 void Counter_clr(CounterRef);
 
-#endif/*__COUNTER_H__*/
+#endif/*EMBUNIT_COUNTER_H*/

@@ -1,10 +1,10 @@
-#ifndef	__PERSON_H__
-#define	__PERSON_H__
+#ifndef	EMBUNIT_PERSON_H
+#define	EMBUNIT_PERSON_H
 
-typedef struct __Person		Person;
-typedef struct __Person*	PersonRef;
+typedef struct embPerson		Person;
+typedef struct embPerson*	PersonRef;
 
-struct __Person {
+struct embPerson {
 	char *fullname;
 	char *firstname;
 	char *lastname;
@@ -22,4 +22,4 @@ void Person_setFullName(PersonRef,char*);
 void Person_setFirstName(PersonRef,char*);
 void Person_setLastName(PersonRef,char*);
 
-#endif/*__PERSON_H__*/
+#endif/*EMBUNIT_PERSON_H*/

@@ -32,8 +32,8 @@
  *
  * $Id: config.h,v 1.7 2004/02/10 16:17:07 arms22 Exp $
  */
-#ifndef __CONFIG_H__
-#define __CONFIG_H__
+#ifndef EMBUNIT_CONFIG_H
+#define EMBUNIT_CONFIG_H
 
 /*	#define NO_STDIO_PRINTF*/
 	#ifdef	NO_STDIO_PRINTF
@@ -45,4 +45,4 @@
 
 	#define ASSERT_STRING_BUFFER_MAX	64
 
-#endif/*__CONFIG_H__*/
+#endif/*EMBUNIT_CONFIG_H*/
