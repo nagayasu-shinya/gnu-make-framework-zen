@@ -61,7 +61,16 @@ CFLAGS += -fPIC
 
 ARFLAGS := -shared -fPIC
 
-MAKEFLAGS += -j$(shell nproc)
+
+NPROCESSORS :=
+ifneq "$(shell which nproc)" ""
+    NPROCESSORS  = $(shell nproc)
+else ifneq "$(shell which getconf _NPROCESSORS_ONLN))" ""
+# Mac OS X is not available nproc.
+    NPROCESSORS = $(shell getconf _NPROCESSORS_ONLN)
+endif
+
+MAKEFLAGS += -j$(NPROCESSORS)
 
 #--------------------------------------------------------------------------------------------------
 # set objcopy.
