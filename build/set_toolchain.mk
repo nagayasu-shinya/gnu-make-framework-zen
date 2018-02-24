@@ -61,14 +61,8 @@ CFLAGS += -fPIC
 
 ARFLAGS := -shared -fPIC
 
-
-NPROCESSORS :=
-ifneq "$(shell which nproc)" ""
-    NPROCESSORS  = $(shell nproc)
-else ifneq "$(shell which getconf _NPROCESSORS_ONLN))" ""
-# Mac OS X is not available nproc.
-    NPROCESSORS = $(shell getconf _NPROCESSORS_ONLN)
-endif
+# nproc is not available in Mac OS X.
+NPROCESSORS := $(shell (nproc) 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null)
 
 MAKEFLAGS += -j$(NPROCESSORS)
 
