@@ -66,6 +66,8 @@ NPROCESSORS := $(shell (nproc) 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/n
 
 MAKEFLAGS += -j$(NPROCESSORS)
 
+CCACHE := $(shell which ccache)
+
 #--------------------------------------------------------------------------------------------------
 # set objcopy.
 #--------------------------------------------------------------------------------------------------

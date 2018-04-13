@@ -32,7 +32,7 @@
 #**************************************************************************************************
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $*.o
+	$(CCACHE) $(CC) $(CFLAGS) -c $< -o $*.o
 
 %.o : %.bin
 	$(OBJCOPY) -I binary -O elf32-littlearm -B arm $(OBJCOPY_FLAGS)  $< $*.o
