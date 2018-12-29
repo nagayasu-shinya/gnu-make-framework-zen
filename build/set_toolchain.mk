@@ -83,3 +83,20 @@ OBJCOPY_FLAGS += --redefine-sym _binary_$(subst .,_,$(subst /,_,$<))_start=_bina
 OBJCOPY_FLAGS += --redefine-sym _binary_$(subst .,_,$(subst /,_,$<))_end=_binary_$(subst .,_,$(notdir $<))_end
 OBJCOPY_FLAGS += --redefine-sym _binary_$(subst .,_,$(subst /,_,$<))_size=_binary_$(subst .,_,$(notdir $<))_size
 OBJCOPY_FLAGS += --rename-section .data=.constdata,alloc,contents,load,readonly,data
+
+#--------------------------------------------------------------------------------------------------
+# set Lint.
+#--------------------------------------------------------------------------------------------------
+
+SPLINT :=
+
+#--------------------------------------------------------------------------------------------------
+# set splint options.
+#--------------------------------------------------------------------------------------------------
+SPLINT_FLAGS =
+SPLINT_FLAGS +=
+IGNORE_EXIT_STATUS = || :
+
+
+
+
