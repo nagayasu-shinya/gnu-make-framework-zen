@@ -79,13 +79,13 @@ define clean-library
 endef
 
 #--------------------------------------------------------------------------------------------------
-# create obj directory.
+# Create object directory.
 # $(call create-output-directories  sources)
 #--------------------------------------------------------------------------------------------------
 define create-output-directories
   output-directories += $(sort $(dir $1))
-# 実際のmkdirは，全出ディレクトリをoutput-directoriesに集めた後に，
-# dummy-create-output-directoriesにて行う.
+# Actually mkdir is executed at phony target of dummy-create-output-directories
+# after collectiting all directory names into variable of output-directories.
 endef
 
 #--------------------------------------------------------------------------------------------------
