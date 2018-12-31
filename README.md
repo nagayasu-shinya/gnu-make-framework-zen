@@ -15,12 +15,14 @@ make は文法も難しいしデバッグは大変だし、ディレクトリ構
 + 複数のターゲット（実行可能ファイル）を作成可能
 + マルチプラットフォームです、GNU/Linux, Mac OS X, MSYS2（Windows）で動作可能
 
-
-
-
 This is a GNU makefile framework which helps your development in environment without support of IDE.
 
-# usage
+# サンプルプログラムのビルド方法
+
+サンプルプログラムを同梱しています。ビルドの方法は下記の通り。
+
+最初に出力ディレクトリを作成し、そこでmakeを実行します。出力ディレクトリ以下にオブジェクトファイルやライブラリ、実行可能ファイルが作成されます。
+つまり元のソースコードディレクトリにファイルを生成しませんので、元のディレクトリは綺麗に保たれます。
 
 ```sh
 mkdir outputs
@@ -31,7 +33,6 @@ make -f ../GNUmakefile
 
 ./sample_programs
 ```
-
 
 # ライセンス
 
