@@ -38,7 +38,7 @@ endif
 	$(CCACHE) $(CC) $(CFLAGS) -c $< -o $*.o
 
 %.o : %.bin
-	$(OBJCOPY) $(OBJCOPY_FLAGS)  $< $*.o
+	$(OBJCOPY) -I binary $(OBJCOPY_FLAGS)  $< $*.o
 
 ## This rule is not nessary, don't use.
 #%.d : %.c
