@@ -77,7 +77,13 @@ CCACHE := $(shell which ccache)
 #--------------------------------------------------------------------------------------------------
 OBJCOPY := $(GCC_ARCH)objcopy
 
+# For ARM.
+OBJCOPY_BFDNAME := elf32-littlearm
+OBJCOPY_BFARCH  := arm
+
 OBJCOPY_FLAGS =
+OBJCOPY_FLAGS += --output-target=$(OBJCOPY_BFDNAME)
+OBJCOPY_FLAGS += --binary-architecture=$(OBJCOPY_BFARCH)
 OBJCOPY_FLAGS += --redefine-sym _binary_$(subst .,_,$(subst /,_,$<))_start=_binary_$(subst .,_,$(notdir $<))_start
 OBJCOPY_FLAGS += --redefine-sym _binary_$(subst .,_,$(subst /,_,$<))_end=_binary_$(subst .,_,$(notdir $<))_end
 OBJCOPY_FLAGS += --redefine-sym _binary_$(subst .,_,$(subst /,_,$<))_size=_binary_$(subst .,_,$(notdir $<))_size
