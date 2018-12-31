@@ -35,9 +35,10 @@ int sample_spinner(unsigned int wait_sec)
     for (i = 0; i < wait_sec; i++) {
         (void) sleep(1);
         printf("\rwating %d sec... %c", wait_sec, spinner_c[i % spinner_len]);
-        fflush(stdout); // バッファを強制的に出力.
+        fflush(stdout);
     }
 
-    puts(""); // 改行表示.
+    puts("");
+
     return 0;
 }

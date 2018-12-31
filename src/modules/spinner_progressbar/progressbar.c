@@ -44,9 +44,10 @@ int sample_progressbar(unsigned int wait_sec)
 
         printf("\033[2K\033[G %d sec\n", i);
         printf("\033[2F");
-        fflush(stdout); // バッファを強制的に出力.
+        fflush(stdout);
     }
 
-    puts(""); // 改行表示.
+    puts("");
+
     return 0;
 }
