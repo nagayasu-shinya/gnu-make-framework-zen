@@ -24,15 +24,15 @@
 #---------------------------------------------------------------------------------------------------
 #
 # @file
-# @brief define macros.
+# @brief Define macros.
 #
-# @author    NAGAYASU Shinya
+# @author         NAGAYASU Shinya
 # @copyright 2017 NAGAYASU Shinya
 #
 #**************************************************************************************************
 
 #--------------------------------------------------------------------------------------------------
-# create objects file list(objects) from source file list(sources).
+# Create object files list from source files list.
 # $(call souce-to-object, source-file-list)
 #--------------------------------------------------------------------------------------------------
 source-to-object = $(subst   .c,.o,$(filter   %.c,$1)) \
@@ -48,19 +48,19 @@ source-to-dependence = $(subst   .c,.d,$(filter   %.c,$1)) \
                        $(subst .arm,.d,$(filter %.arm,$1))
 
 #--------------------------------------------------------------------------------------------------
-# all sources at directory
+# All sources at directory.
 # $(call local-all-sources, directory)
 #--------------------------------------------------------------------------------------------------
 local-all-sources = $(notdir $(wildcard $(addprefix $(SOURCE_TREE_DIR)/$1/,*.c *.cpp *.cxx *.s *.arm)))
 
 #--------------------------------------------------------------------------------------------------
-# path of module.mk.
+# Path of module.mk.
 # $(subdirectory)
 #--------------------------------------------------------------------------------------------------
 subdirectory = $(patsubst $(SOURCE_TREE_DIR)/%/,%, $(dir $(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))))
 
 #--------------------------------------------------------------------------------------------------
-# create library. (static library.)
+# Create library.
 # $(call make-library library-name, sources)
 #--------------------------------------------------------------------------------------------------
 define make-library
@@ -69,7 +69,7 @@ define make-library
 endef
 
 #--------------------------------------------------------------------------------------------------
-# clean the specified library, and clean only .o that depend on it.
+# Clean the specified library, and clean only .o that depend on it.
 # $(call clean-library library-name, sources)
 #--------------------------------------------------------------------------------------------------
 define clean-library
@@ -89,7 +89,7 @@ define create-output-directories
 endef
 
 #--------------------------------------------------------------------------------------------------
-# create executalble file.
+# Create executalble file.
 # $(call make-executable-file exec, start_entry, libraries, sources, ldflags)
 #--------------------------------------------------------------------------------------------------
 define make-executable-file
@@ -98,7 +98,7 @@ define make-executable-file
 endef
 
 #--------------------------------------------------------------------------------------------------
-# clean the specified executable file, and clean only .o/.so that depend on it.
+# Clean the specified executable file, and clean only .o/.so that depend on it.
 # $(call clean-executable-file exec, start_entry, libraries)
 #--------------------------------------------------------------------------------------------------
 define clean-executable-file
@@ -108,7 +108,7 @@ define clean-executable-file
 endef
 
 #--------------------------------------------------------------------------------------------------
-# add include path only specified sources.
+# Add include path only specified sources.
 # $(call add-includes  target_src, inc-path)
 #--------------------------------------------------------------------------------------------------
 define add-includes
@@ -116,7 +116,7 @@ define add-includes
 endef
 
 #--------------------------------------------------------------------------------------------------
-# add cflags  only specified sources.
+# Add cflags  only specified sources.
 # $(call add-cflags  target_src, cflags-parameter)
 #--------------------------------------------------------------------------------------------------
 define add-cflags
@@ -124,7 +124,7 @@ define add-cflags
 endef
 
 #--------------------------------------------------------------------------------------------------
-# add default cflags.  (for all sources.)
+# Add default cflags that effect for all sources.
 # $(call add-default-cflags  cflags_param)
 #--------------------------------------------------------------------------------------------------
 define add-default-cflags

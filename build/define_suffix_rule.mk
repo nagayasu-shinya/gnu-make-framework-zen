@@ -24,17 +24,13 @@
 #---------------------------------------------------------------------------------------------------
 #
 # @file
-# @brief suffix rules.
+# @brief Suffix rules.
 #
 # @author    NAGAYASU Shinya
 # @copyright 2017 NAGAYASU Shinya
 #
 #**************************************************************************************************
 
-#
-# サフィックスルールを空にしたあとに、必要な設定をおこなう.
-# なぜか ".SUFFIXES:" では空にならないので, 
-# make オプション "--no-builtin-rules" を追加.
-
+# Disable default suffix rules. It contains unnecessary suffixes.
 MAKEFLAGS += --no-builtin-rules
 .SUFFIXES:

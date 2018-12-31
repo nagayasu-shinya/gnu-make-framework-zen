@@ -38,8 +38,8 @@ endif
 	$(CCACHE) $(CC) $(CFLAGS) -c $< -o $*.o
 
 %.o : %.bin
-	$(OBJCOPY) -I binary -O elf32-littlearm -B arm $(OBJCOPY_FLAGS)  $< $*.o
+	$(OBJCOPY) $(OBJCOPY_FLAGS)  $< $*.o
 
-## this rule is not nessary. dont use.
+## This rule is not nessary, don't use.
 #%.d : %.c
 #	$(CC) $(CFLAGS) -c $< -o $*.o

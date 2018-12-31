@@ -24,7 +24,7 @@
 #---------------------------------------------------------------------------------------------------
 #
 # @file
-# @brief rule of make executable file.#
+# @brief Rule of make executable file.
 #
 # @author    NAGAYASU Shinya
 # @copyright 2017 NAGAYASU Shinya

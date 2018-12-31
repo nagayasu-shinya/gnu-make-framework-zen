@@ -34,6 +34,35 @@ make -f ../GNUmakefile
 ./sample_programs
 ```
 
+# ライブラリの追加方法
+
+この gnu-make-framework-zen は簡単にライブラリを追加できます。
+
+トップディレクトリにある GNUmakefile が src ディレクトリ以下にある module.mk を全てインクルードします。
+この module.mk はライブラリを作るためのサブメイクファイルです。
+
+このライブラリの
+gnu-make-framework-zen/src/modules/spinner_progressbar/module.mk
+
+```
+local_directory := $(subdirectory)
+
+include $(CLEAR_LOCAL_VARIABLE)
+
+local_module    := 
+
+local_sources   := 
+local_includes  := 
+local_cflags    :=
+local_libraries :=
+
+include $(CREATE_LIBRARY)
+
+
+```
+
+
+
 # ライセンス
 
 ## このプロジェクト全体ののライセンス（Overall license）
@@ -72,3 +101,5 @@ http://embunit.sourceforge.net/embunit/
 # 参考文献
 
 https://www.oreilly.co.jp/library/4873112699/
+
+https://www.oreilly.com/openbook/make3/book/index.csp

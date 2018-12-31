@@ -24,7 +24,7 @@
 #---------------------------------------------------------------------------------------------------
 #
 # @file
-# @brief clean all
+# @brief clean targets.
 #
 # @author    NAGAYASU Shinya
 # @copyright 2017 NAGAYASU Shinya

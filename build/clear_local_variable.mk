@@ -24,14 +24,16 @@
 #---------------------------------------------------------------------------------------------------
 #
 # @file
-# @brief init local variables of each submakefiles.
+# @brief initialize local variables of each submakefiles.
+#
+# This file must be included from all module.mk.
 #
 # @author    NAGAYASU Shinya
 # @copyright 2017 NAGAYASU Shinya
 #
 #**************************************************************************************************
 
-# clear the variables of module.mk.
+# Clear the variables of module.mk.
 
 #local_directory :=
 local_sources   :=

@@ -24,7 +24,7 @@
 #---------------------------------------------------------------------------------------------------
 #
 # @file
-# @brief toolchain setting.
+# @brief Toolchain setting.
 #
 # @author    NAGAYASU Shinya
 # @copyright 2017 NAGAYASU Shinya
@@ -32,7 +32,7 @@
 #**************************************************************************************************
 
 #--------------------------------------------------------------------------------------------------
-# set architecture fot GCC and GNU Binutils.
+# Set architecture fot GCC and GNU Binutils.
 #--------------------------------------------------------------------------------------------------
 
 GCC_ARCH :=
@@ -42,7 +42,7 @@ AR  := $(GCC_ARCH)gcc
 LD  := $(GCC_ARCH)gcc
 
 #--------------------------------------------------------------------------------------------------
-# for gcc.
+# For gcc.
 #--------------------------------------------------------------------------------------------------
 CFLAGS :=
 ifeq "$(VARIANT)" "DEBUG_BUILD"
@@ -61,23 +61,22 @@ CFLAGS += -fPIC
 
 ARFLAGS := -shared -fPIC
 
-# nproc is not available in Mac OS X.
+#--------------------------------------------------------------------------------------------------
+# Set ccache.
+#--------------------------------------------------------------------------------------------------
+
+# "nproc" is not available in Mac OS X.
 NPROCESSORS := $(shell (nproc) 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null)
-
 MAKEFLAGS += -j$(NPROCESSORS)
-
 CCACHE := $(shell which ccache)
 
 #--------------------------------------------------------------------------------------------------
-# set objcopy.
+# Set GNU objcopy options.
+# + Delete path names from symbol name.
+# + Add READ ONLY attribute.
 #--------------------------------------------------------------------------------------------------
 OBJCOPY := $(GCC_ARCH)objcopy
 
-#--------------------------------------------------------------------------------------------------
-# set GNU objcopy options.
-# + delete path names from symbol name.
-# + add READ ONLY attribute.
-#--------------------------------------------------------------------------------------------------
 OBJCOPY_FLAGS =
 OBJCOPY_FLAGS += --redefine-sym _binary_$(subst .,_,$(subst /,_,$<))_start=_binary_$(subst .,_,$(notdir $<))_start
 OBJCOPY_FLAGS += --redefine-sym _binary_$(subst .,_,$(subst /,_,$<))_end=_binary_$(subst .,_,$(notdir $<))_end
