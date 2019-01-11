@@ -99,7 +99,11 @@ SPLINT :=
 # set splint options.
 #--------------------------------------------------------------------------------------------------
 SPLINT_FLAGS =
-SPLINT_FLAGS +=
+#SPLINT_FLAGS += -weak
+SPLINT_FLAGS += +skip-sys-headers
+SPLINT_FLAGS += +posixlib
+
+
 IGNORE_EXIT_STATUS = || :
 
 

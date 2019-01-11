@@ -33,7 +33,7 @@
 
 %.o : %.c
 ifneq "$(SPLINT)" ""
-	$(SPLINT) $(SPLINT_FLAGS) $< $(IGNORE_EXIT_STATUS)
+	$(SPLINT) $(SPLINT_FLAGS) $(filter -I%,$(CFLAGS)) $< $(IGNORE_EXIT_STATUS)
 endif
 	$(CCACHE) $(CC) $(CFLAGS) -c $< -o $*.o
 
