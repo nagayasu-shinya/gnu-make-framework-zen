@@ -1,8 +1,7 @@
 gnu-make-framework-zen
 ==========================
 
-自前で makefile を書くのって大変ではありませんか？
-make は文法も難しいしデバッグは大変だし、ディレクトリ構成を考えるのもめんどくさいし、とにかくめんどくさいですよね。
+自前で makefile を書くのって大変ではありませんか？make は文法も難しいしデバッグは大変だし、ディレクトリ構成を考えるのもめんどくさいし、とにかくめんどくさいですよね。
 この gnu-make-framework-zen はそんなあなたを手助けいたします！
 
 # 特徴
@@ -32,6 +31,41 @@ cd outputs
 make -f ../GNUmakefile
 
 ./sample_programs
+```
+
+# ファイル構成
+
+```
+├── GNUmakefile
+├── LICENSE.txt
+├── README.md
+├── build
+│   ├── clean_all.mk
+│   ├── clear_local_variable.mk
+│   ├── create_executable.mk
+│   ├── create_library.mk
+│   ├── define_macro.mk
+│   ├── define_pattern_rule.mk
+│   ├── define_suffix_rule.mk
+│   └── set_toolchain.mk
+└── src
+    ├── modules
+    │   ├── embunit
+    │   │   ├── module.mk
+    │   │   ├── *.c
+    │   │   └── *.h
+    │   └── spinner_progressbar
+    │       ├── module.mk
+    │       ├── *.c
+    │       └── *.h
+    └── targets
+        ├── sample_embunit
+        │   ├── target.mk
+        │   ├── *.c
+        │   └── *.h
+        └── sample_spinner
+            ├── target.mk
+            └── *.c
 ```
 
 # ライセンス
