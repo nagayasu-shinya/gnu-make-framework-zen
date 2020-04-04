@@ -35,23 +35,26 @@ make -f ../GNUmakefile
 
 # ファイル構成
 
+
+## ファイルツリー
+
 ```
-├── GNUmakefile
-├── LICENSE.txt
-├── README.md
+├── GNUmakefile        --- トップレベルのMakfile
+├── LICENSE.txt        --- ライセンスファイル
+├── README.md          --- このドキュメント
 ├── build
-│   ├── clean_all.mk
-│   ├── clear_local_variable.mk
-│   ├── create_executable.mk
-│   ├── create_library.mk
-│   ├── define_macro.mk
-│   ├── define_pattern_rule.mk
-│   ├── define_suffix_rule.mk
-│   └── set_toolchain.mk
+│   ├── clean_all.mk            --- ビルドしたオブジェクトを全削除するmakefile
+│   ├── clear_local_variable.mk --- 各モジュールの変数を設定するためのmakefile
+│   ├── create_executable.mk    --- 実行可能ファイルをビルドするためのmakefile
+│   ├── create_library.mk       --- モジュールをライブラリ化するためのmakefile
+│   ├── define_macro.mk         --- Makeのマクロを定義するmakefile
+│   ├── define_pattern_rule.mk  --- Makeのパターンルールを定義するmakefile
+│   ├── define_suffix_rule.mk   --- サフィックスルールを設定するmakefile
+│   └── set_toolchain.mk        --- コンパイラなどの設定をするmakefile
 └── src
     ├── modules
     │   ├── embunit
-    │   │   ├── module.mk
+    │   │   ├── module.mk       --- ライブラリ名や対象ソースファイル名を設定するmakefile
     │   │   ├── *.c
     │   │   └── *.h
     │   └── spinner_progressbar
@@ -60,13 +63,22 @@ make -f ../GNUmakefile
     │       └── *.h
     └── targets
         ├── sample_embunit
-        │   ├── target.mk
+        │   ├── target.mk       --- 実行可能ファイル名やライブラリなどを設定するmakefile
         │   ├── *.c
         │   └── *.h
         └── sample_spinner
             ├── target.mk
             └── *.c
 ```
+
+## 各ディレクトリの概要
+
+| ディレクトリ名 | 概要                             |
+| ------------- | -------------------------------- |
+| build/        | ビルドに必要なサブメイクファイル群 |
+| src/modules/  | モジュールのソースコード          |
+| src/targets/  | ターゲット依存のソースコード      |
+
 
 # ライセンス
 
