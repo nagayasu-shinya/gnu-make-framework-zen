@@ -121,6 +121,7 @@ include $(CREATE_LIBRARY)
 $ mkdir outputs
 $ cd outputs
 $ make -f ../GNUmakefile
+$ export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 $ ./sample_programs
 ```
 
