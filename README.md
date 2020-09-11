@@ -16,27 +16,13 @@ gnu-make-framework-zen
 
 This is a GNU makefile framework which helps your development in environment without support of IDE.
 
-# サンプルプログラムのビルド方法
-
-サンプルプログラムを同梱しています。ビルドの方法は下記の通り。
-
-最初に出力ディレクトリを作成し、そこでmakeを実行します。出力ディレクトリ以下にオブジェクトファイルやライブラリ、実行可能ファイルが作成されます。
-つまり元のソースコードディレクトリにファイルを生成しませんので、元のディレクトリは綺麗に保たれます。
-
-```sh
-mkdir outputs
-
-cd outputs
-
-make -f ../GNUmakefile
-
-./sample_programs
-```
 
 # ファイル構成
 
-
 ## ファイルツリー
+
+デフォルトでは下記のような構成になっています。サンプルとしてスピナーを表示する簡易プログラムとembunit（組込み向け単体テストフレームワーク）とを同梱しています。
+
 
 ```
 ├── GNUmakefile        --- トップレベルのMakfile
@@ -73,11 +59,70 @@ make -f ../GNUmakefile
 
 ## 各ディレクトリの概要
 
-| ディレクトリ名 | 概要                             |
-| ------------- | -------------------------------- |
-| build/        | ビルドに必要なサブメイクファイル群 |
-| src/modules/  | モジュールのソースコード          |
-| src/targets/  | ターゲット依存のソースコード      |
+| ディレクトリ名 | 概要                               |
+| -------------- | ---------------------------------- |
+| build/         | ビルドに必要なサブメイクファイル群 |
+| src/modules/   | ライブラリ化するソースコード       |
+| src/targets/   | ターゲット依存のソースコード       |
+
+# 使い方
+
+## ライブラリ作成
+
+ライブラリ化したいコードは src/modules の下におきます。まずsrc の下にディレクトリを作ります。そしてそのディレクトリの下にソースコードを置きます。そしてそこに module.mk というサブメイクファイルを置きます。
+
+サンプルのembunit を例に説明します。まず、src の下にembunit というディレクトリを作ります。そしてそこに .c , .h ファイルを置きます。最後にmodule.mkという名前でmakefileを作ります。
+
+### module.mk の書き方
+
+module.mk の書き方には簡単なルールがあります。 下記に例を示します。
+
+```makefile
+local_directory := $(subdirectory)
+include $(CLEAR_LOCAL_VARIABLE)
+
+local_module    := embunit
+
+local_sources   := AssertImpl.c
+local_sources   += TestCaller.c
+local_sources   += TestResult.c
+local_sources   += TestSuite.c
+local_sources   += RepeatedTest.c
+local_sources   += TestCase.c
+local_sources   += TestRunner.c
+local_sources   += stdImpl.c
+
+local_includes  := $(local_directory)
+local_cflags    :=
+local_libraries :=
+
+include $(CREATE_LIBRARY)
+```
+まず最初の2行の「local_directory := $(subdirectory)」「include $(CLEAR_LOCAL_VARIABLE) 」は変更せずにそのまま記述してください。また最後の行の 「include $(CREATE_LIBRARY)」も変更せずにそのまま記述してください。あとは下記の表の説明を参照して、各変数を設定してください。
+
+| 変数名          | 概要                                 |
+| --------------  | ----------------------------------   |
+| local_module    | ライブラリ名。これに .so がついたライブラリが生成される|
+| local_sources   | ソースコードファイル。これらがコンパイルされてライブラリとなる|
+| local_includes  | インクルードパスの設定。 -I オプションに渡される|
+| local_cflags    | コンパイラオプション。|
+
+
+
+
+# サンプルプログラムのビルド方法
+
+サンプルプログラムを同梱しています。ビルドの方法は下記の通り。
+
+最初に出力ディレクトリを作成し、そこでmakeを実行します。出力ディレクトリ以下にオブジェクトファイルやライブラリ、実行可能ファイルが作成されます。
+つまり元のソースコードディレクトリにファイルを生成しませんので、元のディレクトリは綺麗に保たれます。
+
+```sh
+$ mkdir outputs
+$ cd outputs
+$ make -f ../GNUmakefile
+$ ./sample_programs
+```
 
 
 # ライセンス
