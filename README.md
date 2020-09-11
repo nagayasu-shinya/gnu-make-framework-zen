@@ -108,7 +108,43 @@ include $(CREATE_LIBRARY)
 | local_cflags    | コンパイラオプション。|
 
 
+## 実行可能ファイルの作成
 
+実行可能ファイルを作成するには src/targets の下にソースコードとtarget.mk を置きます。
+
+### target.mk の書き方
+
+target.mk の書き方にはルールがあります。下記に例を示します。
+
+```makefile
+
+local_directory := $(subdirectory)
+include $(CLEAR_LOCAL_VARIABLE)
+
+local_target    := sample_embunit
+
+local_libraries := embunit 
+local_ld_entry  := $(local_directory)/AllTests.c
+local_sources   :=
+local_sources   += counter.c
+local_sources   += counterTest.c
+local_sources   += person.c
+local_sources   += personTest.c
+
+local_includes  := modules/embunit
+
+include $(CREATE_EXECUTABLE)
+```
+
+まず最初の2行の「local_directory := $(subdirectory)」「include $(CLEAR_LOCAL_VARIABLE) 」は変更せずにそのまま記述してください。また最後の行の 「include $(CREATE_EXECUTABLE)」も変更せずにそのまま記述してください。あとは下記の表の説明を参照して、各変数を設定してください。
+
+| 変数名          | 概要                                 |
+| --------------  | ----------------------------------   |
+| local_target    | 実行可能ファイル。ここで設定した名前の実行可能ファイルが生成される|
+| local_library   | 実行可能ファイルが依存するライブラリを指定。拡張子およびプリフィクス（lib）は書かなくて良い|
+| local_ld_entry  | エントリポイントを含むソースコードを指定する。一般的には main 関数もしくはリセットベクタ|
+| local_sources   | ソースコードファイル。コンパイルおよびリンクされる|
+| local_includes  | インクルードパスの設定。 -I オプションに渡される|
 
 # サンプルプログラムのビルド方法
 
