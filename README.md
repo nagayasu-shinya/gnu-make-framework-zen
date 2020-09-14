@@ -5,7 +5,7 @@ This is a GNU makefile framework which helps your development in environment wit
 
 # Features
 
-This gnu-make-framework-zen has a features,
+This gnu-make-framework-zen has these features,
 
 + Make dependencies automatically
 + Make library at each directory
