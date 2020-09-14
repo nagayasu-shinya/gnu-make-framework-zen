@@ -1,46 +1,44 @@
 gnu-make-framework-zen
 ==========================
 
-自前で makefile を書くのって大変ではありませんか？make は文法も難しいしデバッグは大変だし、ディレクトリ構成を考えるのもめんどくさいし、とにかくめんどくさいですよね。
-この gnu-make-framework-zen はそんなあなたを手助けいたします！
-
-# 特徴
-
-この gnu-make-framework-zen は下記の特徴を持っています。
-
-+ ディレクトリごとにライブラリ化
-+ ヘッダファイルの依存関係の自動生成
-+ ソースコードツリーとオブジェクトツリーの分離（出力ディレクトリを指定可能）
-+ 複数のターゲット（実行可能ファイル）を作成可能
-+ マルチプラットフォームです、GNU/Linux, Mac OS X, MSYS2（Windows）で動作可能
-
 This is a GNU makefile framework which helps your development in environment without support of IDE.
 
+# Features
 
-# ファイル構成
+This gnu-make-framework-zen has a features,
 
-## ファイルツリー
++ Make dependencies automatically
++ Make library at each directory
++ Separating Source and Binary
++ Supporting Multiple Binary Trees
++ Multi platform, GNU/Linux, Mac OS X, MSYS2（Windows）
 
-デフォルトでは下記のような構成になっています。サンプルとしてスピナーを表示する簡易プログラムとembunit（組込み向け単体テストフレームワーク）とを同梱しています。
+
+# Directories structure
+
+## File tree
+
+File tree is as following. It have sample programs, simple spinner and embunit.
+（embunit is a test framework for embedded systems)
 
 
 ```
-├── GNUmakefile        --- トップレベルのMakfile
-├── LICENSE.txt        --- ライセンスファイル
-├── README.md          --- このドキュメント
+├── GNUmakefile        --- Top Makfile
+├── LICENSE.txt        --- License file
+├── README.md          --- This file
 ├── build
-│   ├── clean_all.mk            --- ビルドしたオブジェクトを全削除するmakefile
-│   ├── clear_local_variable.mk --- 各モジュールの変数を設定するためのmakefile
-│   ├── create_executable.mk    --- 実行可能ファイルをビルドするためのmakefile
-│   ├── create_library.mk       --- モジュールをライブラリ化するためのmakefile
-│   ├── define_macro.mk         --- Makeのマクロを定義するmakefile
-│   ├── define_pattern_rule.mk  --- Makeのパターンルールを定義するmakefile
-│   ├── define_suffix_rule.mk   --- サフィックスルールを設定するmakefile
-│   └── set_toolchain.mk        --- コンパイラなどの設定をするmakefile
+│   ├── clean_all.mk            --- To clean all generated objects
+│   ├── clear_local_variable.mk --- To initialize variables of submakefiles
+│   ├── create_executable.mk    --- Define macro that create executable files
+│   ├── create_library.mk       --- Define macro that create libraries
+│   ├── define_macro.mk         --- Define util macros
+│   ├── define_pattern_rule.mk  --- Define pattern rules
+│   ├── define_suffix_rule.mk   --- Define suffix rules
+│   └── set_toolchain.mk        --- Set toolchain
 └── src
     ├── modules
     │   ├── embunit
-    │   │   ├── module.mk       --- ライブラリ名や対象ソースファイル名を設定するmakefile
+    │   │   ├── module.mk       --- Set libraries name and set sources that depend it
     │   │   ├── *.c
     │   │   └── *.h
     │   └── spinner_progressbar
@@ -49,33 +47,24 @@ This is a GNU makefile framework which helps your development in environment wit
     │       └── *.h
     └── targets
         ├── sample_embunit
-        │   ├── target.mk       --- 実行可能ファイル名やライブラリなどを設定するmakefile
+        │   ├── target.mk       --- Set executable file name and set source or libraries that depend it
         │   ├── *.c
         │   └── *.h
         └── sample_spinner
             ├── target.mk
             └── *.c
 ```
+# How to use
 
-## 各ディレクトリの概要
+## make libraries
 
-| ディレクトリ名 | 概要                               |
-| -------------- | ---------------------------------- |
-| build/         | ビルドに必要なサブメイクファイル群 |
-| src/modules/   | ライブラリ化するソースコード       |
-| src/targets/   | ターゲット依存のソースコード       |
++ Make directory under src/modules/
++ Put sources at it
++ Make module.mk
 
-# 使い方
+### what's module.mk
 
-## ライブラリ作成
-
-ライブラリ化したいコードは src/modules の下におきます。まずsrc の下にディレクトリを作ります。そしてそのディレクトリの下にソースコードを置きます。そしてそこに module.mk というサブメイクファイルを置きます。
-
-サンプルのembunit を例に説明します。まず、src の下にembunit というディレクトリを作ります。そしてそこに .c , .h ファイルを置きます。最後にmodule.mkという名前でmakefileを作ります。
-
-### module.mk の書き方
-
-module.mk の書き方には簡単なルールがあります。 下記に例を示します。
+For example, embunit's module.mk is as following.
 
 ```makefile
 local_directory := $(subdirectory)
@@ -98,23 +87,27 @@ local_libraries :=
 
 include $(CREATE_LIBRARY)
 ```
-まず最初の2行の「local_directory := $(subdirectory)」「include $(CLEAR_LOCAL_VARIABLE) 」は変更せずにそのまま記述してください。また最後の行の 「include $(CREATE_LIBRARY)」も変更せずにそのまま記述してください。あとは下記の表の説明を参照して、各変数を設定してください。
 
-| 変数名          | 概要                                 |
-| --------------  | ----------------------------------   |
-| local_module    | ライブラリ名。これに .so がついたライブラリが生成される|
-| local_sources   | ソースコードファイル。これらがコンパイルされてライブラリとなる|
-| local_includes  | インクルードパスの設定。 -I オプションに渡される|
-| local_cflags    | コンパイラオプション。|
+First, don't change top of 2 lines, "local_directory := $(subdirectory)", "include $(CLEAR_LOCAL_VARIABLE) ". And, don't change last line, "include $(CREATE_LIBRARY)".
+Other lines should be set as following.
+
+| name            | description                                 |
+| --------------  | ----------------------------------          |
+| local_module    | Library name, prefix ".so" is added by makefile |
+| local_sources   | Source files |
+| local_includes  | Include path, compiler option "-I" |
+| local_cflags    | Compiler option |
 
 
-## 実行可能ファイルの作成
+## make executable files
 
-実行可能ファイルを作成するには src/targets の下にソースコードとtarget.mk を置きます。
++ Make directory under src/targets/
++ Put sources at it
++ Make module.mk
 
 ### target.mk の書き方
 
-target.mk の書き方にはルールがあります。下記に例を示します。
+For example, sample embunit's module.mk is as following.
 
 ```makefile
 
@@ -123,7 +116,7 @@ include $(CLEAR_LOCAL_VARIABLE)
 
 local_target    := sample_embunit
 
-local_libraries := embunit 
+local_libraries := embunit
 local_ld_entry  := $(local_directory)/AllTests.c
 local_sources   :=
 local_sources   += counter.c
@@ -136,22 +129,18 @@ local_includes  := modules/embunit
 include $(CREATE_EXECUTABLE)
 ```
 
-まず最初の2行の「local_directory := $(subdirectory)」「include $(CLEAR_LOCAL_VARIABLE) 」は変更せずにそのまま記述してください。また最後の行の 「include $(CREATE_EXECUTABLE)」も変更せずにそのまま記述してください。あとは下記の表の説明を参照して、各変数を設定してください。
+First, don't change top of 2 lines, "local_directory := $(subdirectory)", "include $(CLEAR_LOCAL_VARIABLE)". And, don't change last line, "include $(CREATE_EXECUTABLE)".
+Other lines should be set as following.
 
-| 変数名          | 概要                                 |
+| name            | description                                 |
 | --------------  | ----------------------------------   |
-| local_target    | 実行可能ファイル。ここで設定した名前の実行可能ファイルが生成される|
-| local_library   | 実行可能ファイルが依存するライブラリを指定。拡張子およびプリフィクス（lib）は書かなくて良い|
-| local_ld_entry  | エントリポイントを含むソースコードを指定する。一般的には main 関数もしくはリセットベクタ|
-| local_sources   | ソースコードファイル。コンパイルおよびリンクされる|
-| local_includes  | インクルードパスの設定。 -I オプションに渡される|
+| local_target    | Executable file name |
+| local_library   | Dependencies, don't need prefix ".so" |
+| local_ld_entry  | A Source that contain entry point, in general, main function or reset vector |
+| local_sources   | Source files |
+| local_includes  | Include path, compiler option "-I" |
 
-# サンプルプログラムのビルド方法
-
-サンプルプログラムを同梱しています。ビルドの方法は下記の通り。
-
-最初に出力ディレクトリを作成し、そこでmakeを実行します。出力ディレクトリ以下にオブジェクトファイルやライブラリ、実行可能ファイルが作成されます。
-つまり元のソースコードディレクトリにファイルを生成しませんので、元のディレクトリは綺麗に保たれます。
+# How to build sample programs
 
 ```sh
 $ mkdir outputs
@@ -162,9 +151,10 @@ $ ./sample_programs
 ```
 
 
-# ライセンス
+# License
 
-## このプロジェクト全体ののライセンス（Overall license）
+
+## Overall license
 
 MIT License
 
@@ -189,14 +179,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-## 他のプロジェクトから派生したファイルのライセンス（Files derived from other sources）
+## Files derived from other sources
 
 ### src/modules/embunit/*
 
-Embedded Unit は、MIT/X Consortium License に従うものとします．
+MIT/X Consortium License
 
 http://embunit.sourceforge.net/embunit/
 
-# 参考文献
+# References
 
-https://www.oreilly.co.jp/library/4873112699/
+https://www.oreilly.com/openbook/make3/book/index.csp
