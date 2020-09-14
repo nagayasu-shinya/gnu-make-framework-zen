@@ -24,21 +24,26 @@
 #---------------------------------------------------------------------------------------------------
 #
 # @file
-# @brief 複数のバイナリツリーを生成可能なビルドシステムのトップメイクファイル．
+# @brief Top of Makefiles
 #
-# ビルドするときは, 出力用ディレクトリを作ってそこで make してください.
-# 元のソースコードツリーには一切変更・追加などをしません.
-# 全ての生成物は作成した出力用ディレクトリにおかれます.
-#
+# If you build the project, make directory for outputs.
+# This Makefiles doesn't change source trees.
 # $ mkdir outputs
 # $ cd outputs
 # $ make -f ../GNUmakefile
 #
-# あるモジュールに依存する .o だけをクリーンしたい場合は,
-# clean-MODULE としてください.
-# たとえば下記のようにすると, libbsp.a に依存する .o だけ削除されます.
+# If you want to clean all binary files genarated from sources,  do as following.
+# $ make -f ../GNUmakefile clean
+# Ohter one, just delete all files at output directory.
 #
-# $ make -f ..\GNUmakefile clean-bsp
+# If you want to clean object files that depend on a module,
+# use a target named "clean-MODULE".
+# For example, to clean object files that depend on a bsp, do as following.
+# $ make -f ../GNUmakefile clean-bsp
+#
+# When debugging makefiles, it is useful arugment "QUIET=".
+# As following, makefile echoes command line.
+# $ make -f ../GNUmakefile QUIET=
 #
 # @author    NAGAYASU Shinya
 # @copyright 2017 NAGAYASU Shinya
@@ -47,23 +52,24 @@
 #**************************************************************************************************
 
 #--------------------------------------------------------------------------------------------------
-# ディレクトリ変数の初期化．CURDIR (== バイナリツリーのトップディレクトリ) からの相対パス表記.
+# Initialize variables for directory that is relative path of CURDIR.
+# CURDIR is direcoty where exists this file.
 #--------------------------------------------------------------------------------------------------
 
-# このトップメイクファイルがおいてあるディレクトリ．
+# Direcoty where exists this file.
 TOP_DIR := $(patsubst %/,%,$(dir $(firstword $(MAKEFILE_LIST))))
 
-# ソースツリーのトップ．
+# Top of source trees.
 SOURCE_TREE_DIR := $(TOP_DIR)/src
 
-# 外部ライブラリのトップ.
+# Top of external libraries.
 LIBRARY_TREE_DIR := $(TOP_DIR)/lib
 
-# ビルドに必要なスクリプト・サブメイクファイルがおいてあるディレクトリ．
+# Submakefiles that is needed to build using this makefile.
 BUILD_DIR := $(TOP_DIR)/build
 
 #--------------------------------------------------------------------------------------------------
-# makeの引数として make QUIET=  とすると、コマンド行をエコーできる.
+# When debugging makefiles, it is useful arugment "QUIET=".
 #--------------------------------------------------------------------------------------------------
 
 QUIET := @
@@ -74,23 +80,19 @@ DEVNUL :=
 endif
 
 #--------------------------------------------------------------------------------------------------
-# all ターゲット.
-# make.exe にターゲットを指定しないときに使われる.
-# 他のターゲット項目が現れるより先に書いておかないといけない.
+# Target "all" is used when make doesn't have any targets at arguments.
 #--------------------------------------------------------------------------------------------------
 
 all:
 
 #--------------------------------------------------------------------------------------------------
-# デバッグレベル設定.
+# Setting debug level.
 #
-# release版: RELEASE_BUILD
-# debug版  : DEBUG_BUILD   (デフォルト)
+# release: RELEASE_BUILD
+# debug  : DEBUG_BUILD (default)
 #
-# release版でビルドしたいときは,
-# makeのコマンド引数から
-# >make VARIANT=RELEASE_BUILD
-# と指定.
+# If you want to set RELEASE_BUILD, do make as following.
+# $ make -f ../GNUmakefile VARIANT=RELEASE_BUILD
 #--------------------------------------------------------------------------------------------------
 VARIANT := DEBUG_BUILD
 
@@ -101,7 +103,7 @@ include $(BUILD_DIR)/define_pattern_rule.mk
 include $(BUILD_DIR)/clean_all.mk
 
 #--------------------------------------------------------------------------------------------------
-# モジュールのサブメイクファイルで使用する変数の初期化．
+# Initialize modules of submakefiles.
 #--------------------------------------------------------------------------------------------------
 
 CLEAR_LOCAL_VARIABLE := $(BUILD_DIR)/clear_local_variable.mk
@@ -109,7 +111,7 @@ CREATE_LIBRARY       := $(BUILD_DIR)/create_library.mk
 CREATE_EXECUTABLE    := $(BUILD_DIR)/create_executable.mk
 
 #--------------------------------------------------------------------------------------------------
-# 実行環境チェック．
+# Check the process environment.
 #--------------------------------------------------------------------------------------------------
 
 $(if $(filter $(notdir $(TOP_DIR)),$(notdir $(CURDIR))),$(error Please run the makefile from the binary tree.))
@@ -118,7 +120,7 @@ $(error Please run the makefile from the binary tree.)
 endif
 
 #--------------------------------------------------------------------------------------------------
-# ソースツリーを探索パスに指定．
+# Set search path for source trees.
 #--------------------------------------------------------------------------------------------------
 
 vpath %.so  $(LIBRARY_TREE_DIR)
@@ -126,11 +128,10 @@ vpath %.c   $(SOURCE_TREE_DIR)
 vpath %.s   $(SOURCE_TREE_DIR)
 
 #==================================================================================================
-# 全体の情報をまとめる変数.
-# 各module.mkの情報を格納する.
+# These variables have each module.mk files information.
 #==================================================================================================
 
-# ソースツリーのトップからの相対パスになるようにする．
+# Note: Set a path from top of source trees.
 
 module-submake-list := $(shell find $(SOURCE_TREE_DIR) -name module.mk)
 target-submake-list := $(shell find $(SOURCE_TREE_DIR) -name target.mk)
@@ -142,16 +143,15 @@ all_dependencies :=
 output-directories :=
 
 #--------------------------------------------------------------------------------------------------
-# モジュールのメイクファイルをインクルード.
+# Include submakefiles.
 #--------------------------------------------------------------------------------------------------
 
 include $(target-submake-list)
 include $(module-submake-list)
 
-
+# Dummy variable to make directory.
+# The "clean" target doesn't need to make directory.
 ifneq "$(MAKECMDGOALS)" "clean"
-# ディレクトリを生成するためのダミー変数.
-# クリーンのときはディレクトリ生成する必要ない.
   dummy-create-output-directories := \
     $(shell for f in $(output-directories); do test -d $$f || mkdir -p $$f; done)
 endif
@@ -163,7 +163,7 @@ all_objects      += $(call source-to-object,    $(all_sources))
 all_dependencies += $(call source-to-dependence,$(all_sources))
 
 #--------------------------------------------------------------------------------------------------
-# ヘッダの依存関係ファイルをインクルード．
+# Include dependencies.
 #--------------------------------------------------------------------------------------------------
 
 ifneq "$(MAKECMDGOALS)" "clean"
