@@ -105,7 +105,7 @@ Other lines should be set as following.
 + Put sources at it
 + Make module.mk
 
-### target.mk の書き方
+### what's target.mk
 
 For example, sample embunit's module.mk is as following.
 
