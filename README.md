@@ -18,7 +18,7 @@ This gnu-make-framework-zen has these features,
 
 ## File tree
 
-File tree is as following. It have sample programs, simple spinner and embunit.
+File tree is as following. It has sample programs, simple spinner and embunit.
 （embunit is a test framework for embedded systems)
 
 
